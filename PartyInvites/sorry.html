@@ -1,0 +1,31 @@
+{{ define "body"}}
+<div class="text-center">
+  <h1>A festa ficará sem graça sem você, {{ .Name }}!</h1>
+  <div>Sentimos muito que você não pode vir, mas obrigado por ter nos avisado.</div>
+  <div>
+    Clique <a href="/list">AQUI</a> para ver quem virá, caso você mude de decisão.
+  </div>
+  <br />
+  <hr />
+  <br />
+{{ if gt (len .Resp) 0 }}
+  <h2>Aqui está uma lista de quem também não comparecerá a esta festa</h2>
+  <table class="table table-bordered table-striped table-sm">
+    <thead>
+    <tr><th>Nome</th><th>Email</th><th>Telefone</th></tr>
+    </thead>
+    <tbody>
+    {{ range .Resp }}
+    {{ if not .WillAttend }}
+    <tr style="background-color: rgba(240,128,128,0.5)">
+      <td>{{ .Name }}</td>
+      <td>{{ .Email }}</td>
+      <td>{{ .Phone }}</td>
+    </tr>
+    {{ end }}
+    {{ end }}
+    </tbody>
+  </table>
+  {{ end }}
+</div>
+{{ end }}
